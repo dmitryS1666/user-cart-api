@@ -3,7 +3,7 @@ class CreateCarts < ActiveRecord::Migration[5.2]
     create_table :carts do |t|
       t.float :total_sum
       t.integer :products_count
-      t.string :products, array: true
+      t.text :products, array: true, default: []
 
       t.timestamps
     end

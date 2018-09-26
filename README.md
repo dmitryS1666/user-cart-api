@@ -1,24 +1,67 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+«Корзина» магазина
 
-Things you may want to cover:
+Rails 5.2.1, ruby 2.5.1p57
 
-* Ruby version
+Запросы:
 
-* System dependencies
+    1. GET /api/products (Получение списка продуктов)
+    
+        Принимаемые параметры: нет.
+        
+        Пример ответа:
+           	{
+           		"id": 1,
+           		"name": "Product 1",
+           		"description": "Product 1 - Text",
+           		"price": 10.0,
+           	} ...
+            
+    2. POST /api/cart (Добавление продукта в корзину)
+        
+        Принимаемые параметры: 
+            product_id/integer/ID продукта, обязательный
+            quantity/integer/Количество, целое число от 1 до 10
+        
+        Возвращаемые данные: нет
+        
+    3. DELETE /api/cart/{product_id} (Удаление продукта из корзины)
+    
+        Принимаемые параметры:
+            product_id/integer/ID продукта, обязательный
+            
+        Возвращаемые данные: нет
+    
+    4. GET /api/cart (Получение информации о корзине)
+    
+        Принимаемые параметры: нет.
+        
+        Пример ответа:
+            {
+            	"total_sum": 222.0,
+            	"products_count": 43,
+            	"products": [
+            		{
+            			"id": 1,
+            			"quantity": 9,
+            			"sum": 90
+            		},
+            		{
+            			"id": 2,
+            			"quantity": 7,
+            			"sum": 105
+            		},
+            		{
+            			"id": 4,
+            			"quantity": 27,
+            			"sum": 27
+            		}
+            	]
+            }
 
-* Configuration
 
-* Database creation
+В качестве БД использовал SQLite3. 
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Для генерации начальных товарных позиций необходимо выполнить команду: rails db:seed 
+               

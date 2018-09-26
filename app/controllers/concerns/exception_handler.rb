@@ -1,5 +1,4 @@
 module ExceptionHandler
-  # provides the more graceful `included` method
   extend ActiveSupport::Concern
 
   included do
@@ -9,6 +8,18 @@ module ExceptionHandler
 
     rescue_from ActiveRecord::RecordInvalid do |e|
       json_response({ message: e.message }, :unprocessable_entity)
+    end
+
+    rescue_from RangeError do |e|
+      json_response({ message: e.message }, 400)
+    end
+
+    rescue_from ActionController::RoutingError do |e|
+      json_response({ message: e.message }, 404)
+    end
+
+    rescue_from ActionView::MissingTemplate do |e|
+      json_response({ message: e.message }, 404)
     end
   end
 end
